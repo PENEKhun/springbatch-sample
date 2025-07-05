@@ -12,7 +12,12 @@ CREATE TABLE products
     name        VARCHAR(100)   NOT NULL,
     description TEXT,
     price       DECIMAL(15, 2) NOT NULL,
-    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_id     BIGINT         NOT NULL, -- 이 상품을 사용 중인 사용자
+    start_date  DATE           NOT NULL, -- 사용 시작일
+    end_date    DATE,                    -- 사용 종료일 (NULL이면 현재 사용 중)
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE invoices
